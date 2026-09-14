@@ -1,0 +1,125 @@
+SINGAPORE TRAVEL PLANNING ASSISTANT
+Sample questions, test cases, and expected response behavior
+
+The live MCP values in these tests are intentionally not hard-coded because weather and exchange rates change. When these questions are run in the application, the MCP section should contain the values returned at that time.
+
+============================================================
+TEST 1 — RAG ONLY
+============================================================
+User:
+Which neighbourhoods are suitable for cultural experiences in Singapore?
+
+Expected tool behavior:
+- Call search_knowledge_base.
+- Do not call the weather or currency MCP tools.
+- Use the retrieved Singapore travel documents as the factual basis.
+- Include source title and source URL.
+
+Example response shape:
+
+### Knowledge Base Facts & Sources
+
+- Chinatown — cultural area with the Buddha Tooth Relic Temple and Sri Mariamman Temple.
+- Kampong Gelam — historic Malay district associated with Sultan Mosque and Arab Street.
+- Little India — neighbourhood with Sri Veeramakaliamman Temple and Mustafa Centre.
+
+Sources: cite the exact source title and URL returned by RAG.
+
+### Personalized Recommendations
+
+A reasonable cultural route could group Chinatown, Kampong Gelam, and Little India across different parts of the trip. This is an AI-generated planning suggestion based on the retrieved facts.
+
+============================================================
+TEST 2 — MCP WEATHER
+============================================================
+User:
+What is the weather forecast for Singapore for the next three days?
+
+Expected tool behavior:
+- Call get_weather_forecast through the MCP client.
+- Return three forecast dates.
+- Label the result as MCP Tool Information.
+- Include the retrieval time and external source returned by the MCP server.
+
+The exact temperature and rain values must come from the live tool at test time.
+
+============================================================
+TEST 3 — MCP CURRENCY
+============================================================
+User:
+Convert INR 50,000 to SGD.
+
+Expected tool behavior:
+- Call convert_currency through the MCP client.
+- Use the live returned exchange rate.
+- Do not use a hard-coded rate.
+- Clearly identify the value as MCP Tool Information.
+
+The exact converted amount must come from the live tool at test time.
+
+============================================================
+TEST 4 — REQUIRED COMBINED SCENARIO
+============================================================
+User:
+Create a three-day Singapore itinerary for next week and adjust the activities according to the weather forecast.
+
+Expected tool behavior:
+1. Use RAG for attractions, itinerary ideas, transportation, and indoor/outdoor options.
+2. Work out the three relevant future dates from the current Singapore date.
+3. Call the weather MCP tool for those dates.
+4. Produce a day-by-day itinerary.
+5. Replace weather-sensitive outdoor activities with indoor alternatives when the forecast calls for it.
+6. Distinguish knowledge-base facts, MCP weather data, and generated recommendations.
+
+Example response shape:
+
+### Knowledge Base Facts & Sources
+
+The itinerary uses attractions and sample itinerary information retrieved from the Singapore travel documents. Each factual source should be cited with its returned title and URL.
+
+### Real-Time Information (MCP)
+
+[MCP Tool Information]
+The weather forecast for the selected three dates was retrieved live from the MCP weather tool. The exact dates, temperatures, rainfall and probabilities should match the tool response.
+
+### Personalized Recommendations
+
+Day 1 — Outdoor-focused plan if conditions are suitable.
+Day 2 — Indoor alternatives if rain is expected.
+Day 3 — A mixed plan based on the third day's forecast.
+
+============================================================
+TEST 5 — COMBINED BUDGET
+============================================================
+User:
+I have a budget of INR 60,000. Convert it to SGD and suggest a three-day Singapore itinerary.
+
+Expected tool behavior:
+- Use RAG for itinerary and destination information.
+- Use MCP currency conversion for INR → SGD.
+- Keep the live exchange rate separate from source-backed destination facts.
+- Present itinerary choices as recommendations rather than claiming unsupported exact costs.
+
+============================================================
+TEST 6 — MULTI-TURN CONTEXT
+============================================================
+Turn 1:
+Plan a three-day Singapore trip for my family.
+
+Turn 2:
+Make the second day more suitable for children.
+
+Expected behavior:
+The second response should retain the previous Singapore/family/three-day context from StreamlitChatMessageHistory and revise Day 2 without requiring the user to repeat those constraints.
+
+============================================================
+TEST 7 — MISSING KNOWLEDGE
+============================================================
+User:
+What are the best ski resorts in Singapore?
+
+Expected behavior:
+- Search the knowledge base.
+- Reject weak/unrelated retrieval results.
+- State that the requested ski-resort information is not available in the knowledge base.
+- Do not invent a ski resort, price, attraction, or destination fact.
