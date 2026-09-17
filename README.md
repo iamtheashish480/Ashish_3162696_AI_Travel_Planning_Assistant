@@ -133,6 +133,18 @@ For requests that need the relevant information, the assistant uses:
 
 The sections are used when applicable. A simple destination question does not need a weather or currency tool, while a weather-aware itinerary can use both RAG and MCP.
 
+## Git repo details and installation process
+
+1. Clone the Repository
+
+Open a terminal and clone the GitHub repository:
+
+git clone https://github.com/iamtheashish480/Ashish_3162696_Data_Science_Assignment.git
+
+Navigate to the project directory:
+
+cd Ashish_3162696_Data_Science_Assignment
+
 ## Setup
 
 ### 1. Create a virtual environment
@@ -275,21 +287,21 @@ The RAG tool should be unable to provide sufficiently relevant ski-resort inform
 
 ## Acceptance-criteria checklist
 
-| Assignment criterion | Implementation |
-|---|---|
-| Knowledge base from at least three resources | Three public Singapore sources under `data/` |
-| Embedding-based semantic retrieval | Hugging Face MiniLM + FAISS |
-| Grounded answers with sources | RAG metadata includes source title and URL; prompt requires citations |
-| Weather through MCP | `get_weather_forecast` on `mcp_server.py` |
-| Currency through MCP | `convert_currency` on `mcp_server.py` |
-| At least one combined RAG + MCP response | Required three-day weather-aware scenario |
-| Multi-turn retained context | `StreamlitChatMessageHistory` |
-| Tool selection based on intent | LangChain agent prompt + distinct tool descriptions |
-| Missing knowledge/tool failures | Relevance threshold + explicit MCP failure messages |
-| Simple usable UI | Streamlit chat interface |
-| Prompt/context strategy documented | This README and `agent.py` |
-| Sample questions/responses | Sample scenarios in this README and `sample.txt` |
-| Short demonstration | The six test scenarios above cover RAG, MCP, combined use, and context |
+| Assignment criterion                         | Implementation                                                         |
+| -------------------------------------------- | ---------------------------------------------------------------------- |
+| Knowledge base from at least three resources | Three public Singapore sources under `data/`                           |
+| Embedding-based semantic retrieval           | Hugging Face MiniLM + FAISS                                            |
+| Grounded answers with sources                | RAG metadata includes source title and URL; prompt requires citations  |
+| Weather through MCP                          | `get_weather_forecast` on `mcp_server.py`                              |
+| Currency through MCP                         | `convert_currency` on `mcp_server.py`                                  |
+| At least one combined RAG + MCP response     | Required three-day weather-aware scenario                              |
+| Multi-turn retained context                  | `StreamlitChatMessageHistory`                                          |
+| Tool selection based on intent               | LangChain agent prompt + distinct tool descriptions                    |
+| Missing knowledge/tool failures              | Relevance threshold + explicit MCP failure messages                    |
+| Simple usable UI                             | Streamlit chat interface                                               |
+| Prompt/context strategy documented           | This README and `agent.py`                                             |
+| Sample questions/responses                   | Sample scenarios in this README and `sample.txt`                       |
+| Short demonstration                          | The six test scenarios above cover RAG, MCP, combined use, and context |
 
 ## Project files
 
