@@ -180,6 +180,8 @@ Copy `.env.example` to `.env` and add your Google Gemini API key:
 ```env
 GEMINI_API_KEY=your_google_gemini_api_key_here
 GEMINI_MODEL=gemini-3.6-flash
+HF_TOKEN=your_huggingface_token_here
+
 ```
 
 Do not commit `.env` to Git.
