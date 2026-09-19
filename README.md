@@ -178,7 +178,7 @@ The first RAG run may download the embedding model from Hugging Face.
 Copy `.env.example` to `.env` and add your Google Gemini API key:
 
 ```env
-GEMINI_API_KEY=your_google_gemini_api_key_here
+GEMINI_API_KEY=your_google_gemini_api_key_here (AQ.Ab8RN6L4wdbN5NYUnwblCLAQA57ULzXTF5pc07XGSs1eVmagcQ   new key for testing)
 GEMINI_MODEL=gemini-3.6-flash
 HF_TOKEN=your_huggingface_token_here
 
